@@ -5,6 +5,10 @@ set -e
 
 INITIUM_VERSION="1.0.0"
 APP_NAME="ustart"
+NC='\033[0m'
+
+TERM_RED='\033[0;31m'
+TERM_GREEN='\033[0;32m'
 
 ascii_splash(){
 	clear
@@ -51,131 +55,154 @@ Usage: ustart -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
 EOF
 }
 
-# ---------------VARIABLES---------------
+new_project(){
 
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m'
+	# ---------------VARIABLES---------------
 
-name=""
-mcu="STM32F103"
-readme="ask"
-destDir=""
-# ---------------OPTIONS PARSING---------------
+	name=""
+	mcu="STM32F103"
+	readme="ask"
+	destDir=""
+	# ---------------OPTIONS PARSING---------------
 
-while [[ $# -gt 0 ]]; do
-	case "$1" in
-		-n|--name)
-			name="$2"
-			shift 2
-			;;
-		-m|--mcu)
-			mcu="$2"
-			shift 2
-			;;
-		-r|--readme)
-			readme="$2"
-			shift 2
-			;;
-		-d|--dest)
-			destDir="$2"
-			shift 2
-			;;
-		-v|--version)
-			show_version
-			exit 0
-			;;
-		-h|--help)
-			show_help
-			exit 0
-			;;
-		--)
-			shift
-			break
-			;;
-		*)
-			echo -e "${RED}Error!${NC} Unknown option '$1'"
-			exit 3
-			;;
-	esac
-done
-
-
-templateBaseDir="$HOME/.ustart/template"
-
-# ---------------INPUT VALIDATION---------------
-
-if [ -z "$name" ]; then
-	echo  "$APP_NAME" "v$INITIUM_VERSION"
-	echo "Use -h or --help to see options"
-	exit 1
-fi
-
-if [ -z "$destDir" ]; then
-	echo -e "${RED}Error: No destination provided!${NC} Please use -d or --dest to specify destination directory."
-	exit 2
-fi
-
-if [ -d "$templateBaseDir/$mcu" ]; then
-	echo -e "${GREEN}Template Found!${NC} ($mcu)"
-else
-	echo -e "${RED}Error: Template Not Found!${NC}"
-	exit 2
-fi
-
-if [[ ! "$name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-	echo -e "${RED}Error: Invalid Input!${NC} Project name must only be letters, numbers, underscores, or dashes."
-	exit 1
-fi
-
-if [ -d "$name" ]; then
-	echo -e "${RED}Error:${NC} Directory Already Exists!"
-	exit 1
-fi
-
-# ---------------PROJECT CREATION---------------
-
-mkdir -p "$destDir/$name"
-cp -r "$templateBaseDir/$mcu/"* "$destDir/$name"/
-echo -e "${GREEN}New Template Created!${NC}\n"
-
-# ---------------README PROMPT---------------
-
-if [ "$readme" = "ask" ]; then
-	while true; do
-		read -p "Create README.md file? (y / n): " input
-		case "$input" in
-			[yY])
-				readme="y"; break  ;;
-			[nN])
-				readme="n"; break ;;
+	while [[ $# -gt 0 ]]; do
+		case "$1" in
+			-n|--name)
+				name="$2"
+				shift 2
+				;;
+			-m|--mcu)
+				mcu="$2"
+				shift 2
+				;;
+			-r|--readme)
+				readme="$2"
+				shift 2
+				;;
+			-d|--dest)
+				destDir="$2"
+				shift 2
+				;;
+			-v|--version)
+				show_version
+				exit 0
+				;;
+			-h|--help)
+				show_help
+				exit 0
+				;;
+			--)
+				shift
+				break
+				;;
 			*)
-				echo -e "${RED}Error: Invalid Input!${NC} Please enter y / n"; break ;;
+				echo -e "${TERM_RED}Error!${NC} Unknown option '$1'"
+				exit 3
+				;;
 		esac
 	done
-fi
 
-# ---------------README CREATION---------------
 
-if [ "$readme" = "y" ]; then
-	touch "$name/README.md"
-	echo -e "${GREEN}README File Created!${NC}"
-elif [ "$readme" = "n" ]; then
-	echo "Skipping README Creation..."
-fi
+	templateBaseDir="$HOME/.ustart/template"
 
-# ---------------DISPLAY PROJECT INFO---------------
+	# ---------------INPUT VALIDATION---------------
 
-echo -e "\nDisplaying New Project Structure:"
-if command -v tree >/dev/null 2>&1; then
-	tree "$name"
-else
-	echo -e "${RED}Cannot find tree command!${NC} Displaying new directory with ls"
-	ls -R "$name"
-fi
+	if [ -z "$name" ]; then
+		echo  "$APP_NAME" "v$INITIUM_VERSION"
+		echo "Use -h or --help to see options"
+		exit 1
+	fi
 
-echo -e "\nNew Project Name: $name\nTarget MCU: $mcu\n"
+	if [ -z "$destDir" ]; then
+		echo -e "${TERM_RED}Error: No destination provided!${NC} Please use -d or --dest to specify destination directory."
+		exit 2
+	fi
 
-echo -e "${GREEN}Thank You!${NC} Exiting..."
+	if [ -d "$templateBaseDir/$mcu" ]; then
+		echo -e "${TERM_GREEN}Template Found!${NC} ($mcu)"
+	else
+		echo -e "${TERM_RED}Error: Template Not Found!${NC}"
+		exit 2
+	fi
 
-exit 0
+	if [[ ! "$name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+		echo -e "${TERM_RED}Error: Invalid Input!${NC} Project name must only be letters, numbers, underscores, or dashes."
+		exit 1
+	fi
+
+	if [ -d "$name" ]; then
+		echo -e "${TERM_RED}Error:${NC} Directory Already Exists!"
+		exit 1
+	fi
+
+	# ---------------PROJECT CREATION---------------
+
+	mkdir -p "$destDir/$name"
+	cp -r "$templateBaseDir/$mcu/"* "$destDir/$name"/
+	echo -e "${TERM_GREEN}New Template Created!${NC}\n"
+
+	# ---------------README PROMPT---------------
+
+	if [ "$readme" = "ask" ]; then
+		while true; do
+			read -p "Create README.md file? (y / n): " input
+			case "$input" in
+				[yY])
+					readme="y"; break  ;;
+				[nN])
+					readme="n"; break ;;
+				*)
+					echo -e "${TERM_RED}Error: Invalid Input!${NC} Please enter y / n"; break ;;
+			esac
+		done
+	fi
+
+	# ---------------README CREATION---------------
+
+	if [ "$readme" = "y" ]; then
+		touch "$name/README.md"
+		echo -e "${TERM_GREEN}README File Created!${NC}"
+	elif [ "$readme" = "n" ]; then
+		echo "Skipping README Creation..."
+	fi
+
+	# ---------------DISPLAY PROJECT INFO---------------
+
+	echo -e "\nDisplaying New Project Structure:"
+	if command -v tree >/dev/null 2>&1; then
+		tree "$name"
+	else
+		echo -e "${TERM_RED}Cannot find tree command!${NC} Displaying new directory with ls"
+		ls -R "$name"
+	fi
+
+	echo -e "\nNew Project Name: $name\nTarget MCU: $mcu\n"
+
+	echo -e "${TERM_GREEN}Thank You!${NC} Exiting..."
+
+	exit 0
+}
+
+# ---------------SUBCOMMAND LOGIC---------------
+
+COMMAND="$1"
+shift
+
+case "$COMMAND" in
+	new)
+		echo "New Project Creation"
+		;;
+	build)
+		echo "[!] 'build' not implemented yet!"
+		;;
+	flash)
+		echo "[!] 'flash' not implemented yet!"
+		;;
+	--help|-h)
+		show_help
+		;;
+	*)
+		echo "[!] Unknown command: $COMMAND"
+		exit 1
+		;;
+esac
