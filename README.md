@@ -2,14 +2,18 @@
 **μstart** is a CLI Firmware Development Project Generator Focused on Bare-Metal Minimalism
 
 ## Features
-- Minimal startup files (startup.s, linker.ld, main.c)
+- Minimal startup files (`startup.s`, `linker.ld`, `main.c`)
 - No vendor library dependencies 
 - Modular project templates for different MCU families
 
 ## Installation
 
 ### Prerequisites
+#### Core
 - rsync
+#### Family-Specific
+- GNU ARM Toolchain (`arm-none-eabi-gcc`, `arm-none-eabi-ld`)
+- st-flash
 
 ### Installation Commands
 ```bash
@@ -23,3 +27,6 @@ bash install.sh
 ustart new --name new_project --dest . --template STM32F1 --variant f103c8t6 --readme n
 ```
 - Generates a new project named "new_project" in the current working directory targeting a STM32F103C8T6 MCU and skips generating a README.md file
+
+## Currently Supported MCU Families
+- STM32f1xx
