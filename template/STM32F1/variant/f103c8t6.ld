@@ -1,5 +1,5 @@
 /*
- * =======================================================================================
+ * ================================================================================================
  *  Linker Script for STM32F103xB (Medium-Density Devices)
  *  Target Example: STM32F103C8T6
  *
@@ -17,9 +17,10 @@
  *  - .data/.bss	Initialized and zero-initialized RAM
  *
  *  Version: 1.0.0
- *  Author: Eric Hardy
  *  Date: 2025-04-23
- * =======================================================================================
+ *  Copyright 2025 Eric Robyn-Hardy
+ *  Licensed under the MIT License - See LICENSE file or https://github.com/NamesE4044/ustart
+ * ================================================================================================
  */
 /* Entry Point */
 ENTRY(Reset_Handler)

@@ -1,5 +1,5 @@
 /*
- * ===============================================================================
+ * ================================================================================================
  *  STM32F103xB Register Definitions
  *  Target Devices: STM32F103C6, C8, CB, R8, RB (Medium-Density)
  *
@@ -15,9 +15,10 @@
  *  - Must match linker script and startup code expectations
  *
  *  Version: 1.0.0
- *  Author: Eric Hardy
  *  Date 2025-04-23
- * ================================================================================
+ *  Copyright 2025 Eric Robyn-Hardy
+ *  Licensed under the MIT License - See LICENSE file or https://github.com/NamesE4044/ustart
+ * ================================================================================================
  */
 
 #ifndef STM32F103_H
