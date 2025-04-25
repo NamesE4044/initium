@@ -188,7 +188,7 @@ new_project(){
 		ls -R "$name"
 	fi
 
-	echo -e "\nNew Project Name: $name\nTarget MCU: $template$variant\n"
+	echo -e "\nNew Project Name: $name\nTarget MCU: $template-$variant\n"
 
 	echo -e "${TERM_GREEN}Thank You!${NC} Exiting..."
 
