@@ -21,6 +21,8 @@ FLASH = 0x08000000
 
 OUT = flash
 
+.PHONY: all clean flash erase
+
 all: $(OUT).bin
 
 $(OUT).elf: $(SRC:.c=.o) $(ASM:.s=.o)
@@ -43,3 +45,6 @@ clean:
 flash:
 	$(FLASHER) erase
 	$(FLASHER) write $(OUT).bin $(FLASH)
+
+erase:
+	$(FLASHER) erase
