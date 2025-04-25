@@ -1,19 +1,19 @@
 #!/bin/bash
 set -e
 
-INITIUM_DIR="$HOME/.initium"
+INITIUM_DIR="$HOME/.firmkit"
 BIN_PATH="$INITIUM_DIR/bin"
 TEMPLATE_PATH="$INITIUM_DIR/template"
-LINK_PATH="$HOME/.local/bin/initium"
+LINK_PATH="$HOME/.local/bin/firmkit"
 
-echo "[*] Installing initium Locally"
+echo "[*] Installing firmkit Locally"
 
 mkdir -p "$BIN_PATH"
 mkdir -p "$TEMPLATE_PATH"
 mkdir -p "$HOME/.local/bin"
 
-cp ./initium "$BIN_PATH/initium"
-chmod +x "$BIN_PATH/initium"
+cp ./firmkit "$BIN_PATH/firmkit"
+chmod +x "$BIN_PATH/firmkit"
 
 cp -r ./template/* "$TEMPLATE_PATH/"
 
@@ -21,7 +21,7 @@ if [[ -f "$LINK_PATH" ]]; then
 	echo "[!] Existing symlink at $LINK_PATH found. Replacing..."
 	rm "$LINK_PATH"
 fi
-ln -s "$BIN_PATH/initium" "$LINK_PATH"
+ln -s "$BIN_PATH/firmkit" "$LINK_PATH"
 
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	echo -e "\n[!] WARNING: ~/.local/bin is not in your PATH."
@@ -29,5 +29,5 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	echo "	export PATH=\"\$HOME/.local/bin:\$PATH\""
 fi
 
-echo -e "\n[!] initium installed successfully!"
-echo "	You can now run: initium -h"
+echo -e "\n[!] firmkit installed successfully!"
+echo "	You can now run: firmkit -h"
