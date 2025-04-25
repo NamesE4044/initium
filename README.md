@@ -5,4 +5,5 @@ General Purpose STM32 Bare-Metal Embedded Project Generator
 ```bash
 git clone https://github.com/NamesE4044/initium.git
 cd initium
-bash install.sh```
+bash install.sh
+```
