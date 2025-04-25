@@ -4,20 +4,24 @@ set -e
 # ---------------FUNCTIONS & CORE VARIABLES---------------
 
 INITIUM_VERSION="1.0.0"
-APP_NAME="initium"
+APP_NAME="firmkit"
 
 ascii_splash(){
 	clear
 cat << "EOF"
-▄ ▄▄▄▄  ▄    ■  ▄ █  ▐▌▄▄▄▄  
-▄ █   █ ▄ ▗▄▟▙▄▖▄ ▀▄▄▞▘█ █ █ 
-█ █   █ █   ▐▌  █      █   █ 
-█       █   ▐▌  █            
-            ▐▌               
-                             
-                             
 
-Initium - General Purpose Bare-Metal Embedded Project Generator
+   ad88  88                                  88         88
+  d8"    ""                                  88         ""    ,d
+  88                                         88               88
+MM88MMM  88  8b,dPPYba,  88,dPYba,,adPYba,   88   ,d8   88  MM88MMM
+  88     88  88P'   "Y8  88P'   "88"    "8a  88 ,a8"    88    88
+  88     88  88          88      88      88  8888[      88    88
+  88     88  88          88      88      88  88`"Yba,   88    88,
+  88     88  88          88      88      88  88   `Y8a  88    "Y888
+
+
+
+Firmkit - General Purpose Bare-Metal Embedded Project Generator
 EOF
 }
 
@@ -32,18 +36,18 @@ show_help(){
 cat << "EOF"
 
 
-Usage: initium -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
+Usage: firmkit -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
 
 	Options:
 		-n, --name:	New Project Name (Required)
 		-d, --dest:	New Project Destination Folder (Required)
 		-m, --mcu:	Target MCU (Default: STM32F103)
-		-r, --readme:	Create README file in new project (if left blank, initium will prompt
+		-r, --readme:	Create README file in new project (if left blank, firmkit will prompt
 		-h, --help:	Show this help page	
 		-v, --version:	Show Version Information
 
 	Example:
-		initium -n newProj -d ~/Desktop/ -m STM32F103 -r n
+		firmkit -n newProj -d ~/Desktop/ -m STM32F103 -r n
 EOF
 }
 
@@ -97,7 +101,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 
-templateBaseDir="$HOME/Desktop/development/initium.d/template"
+templateBaseDir="$HOME/.firmkit/template"
 
 # ---------------INPUT VALIDATION---------------
 

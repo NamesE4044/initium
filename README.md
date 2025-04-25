@@ -1,5 +1,5 @@
-# Initium
-General Purpose STM32 Bare-Metal Embedded Project Generator
+# Firmkit
+**Firmkit** is a General Purpose CLI Firmware Development Toolkit Focused on Bare-Metal Minimalism
 
 ## Installation
 ```bash
