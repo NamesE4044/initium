@@ -1,5 +1,5 @@
 # **μstart**
-**μstart** is a CLI Firmware Development Project Generator Focused on Bare-Metal Minimalism
+**μstart** is a Linux CLI Firmware Development Project Generator Focused on Bare-Metal Minimalism
 
 ## Features
 - Minimal startup files (`startup.s`, `linker.ld`, `main.c`)
@@ -11,10 +11,10 @@
 ### Prerequisites
 #### Core
 - rsync
-- tree (**Not mandatory**, script will fallback to ls -R if not found)
+- tree (**NOT MANDATORY**, script will fallback to ls -R if not found)
 #### Family-Specific
 - GNU ARM Toolchain (`arm-none-eabi-gcc`, `arm-none-eabi-ld`)
-- st-flash
+- stlink-tools (`st-flash`)
 
 ### Installation Commands
 ```bash
