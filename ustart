@@ -9,17 +9,17 @@ APP_NAME="ustart"
 ascii_splash(){
 	clear
 cat << "EOF"
-
-   ad88  88                                  88         88
-  d8"    ""                                  88         ""    ,d
-  88                                         88               88
-MM88MMM  88  8b,dPPYba,  88,dPYba,,adPYba,   88   ,d8   88  MM88MMM
-  88     88  88P'   "Y8  88P'   "88"    "8a  88 ,a8"    88    88
-  88     88  88          88      88      88  8888[      88    88
-  88     88  88          88      88      88  88`"Yba,   88    88,
-  88     88  88          88      88      88  88   `Y8a  88    "Y888
-
-
+                                                                  
+                                                                  
+                          ,d                               ,d     
+                          88                               88     
+88       88  ,adPPYba,  MM88MMM  ,adPPYYba,  8b,dPPYba,  MM88MMM  
+88       88  I8[    ""    88     ""     `Y8  88P'   "Y8    88     
+88       88   `"Y8ba,     88     ,adPPPPP88  88            88     
+88a,   ,a88  aa    ]8I    88,    88,    ,88  88            88,    
+88`"YbbdPY8 `"YbbdP"'    "Y888   `"8bbdP"Y8  88            "Y888  
+88                                                                  
+                                                                  
 
 ustart - General Purpose Bare-Metal Embedded Project Generator
 EOF
