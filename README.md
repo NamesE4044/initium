@@ -38,6 +38,6 @@ ustart new --name new_project --dest . --template STM32F1 --variant f103c8t6 --r
 - GD32VF1xx (RISC-V)
 
 ## License
-- μstart - Copyright © 2025 Eric Robyn-Hardy
-- This project is licensed under the MIT License.
-- See the [LICENSE](./LICENSE) file for full details.
+ μstart - Copyright © 2025 Eric Robyn-Hardy
+ This project is licensed under the MIT License.
+ See the [LICENSE](./LICENSE) file for full details.
