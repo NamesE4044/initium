@@ -13,10 +13,11 @@ OBJCOPY = arm-none-eabi-objcopy
 SRC = main.c
 ASM = startup.s
 LINKER = stm32f103c8t6.ld
+MAP_FILE = firmware.map
 INCLUDE = -I.
 
 CFLAGS = $(CPU) $(FPU) $(OPT) -Wall -ffunction-sections -ffreestanding -fdata-sections $(INCLUDE)
-LDFLAGS = -T $(LINKER)
+LDFLAGS = -T $(LINKER) -Map=$(MAP_FILE)
 
 FLASHER = st-flash
 FLASH = 0x08000000
@@ -39,6 +40,7 @@ $(OUT).elf: $(SRC:.c=.o) $(ASM:.s=.o)
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
+	mkdir $(BUILD_DIR)
 	mv *.o *.elf *.map *.bin $(BUILD_DIR)
 
 clean:
