@@ -39,4 +39,4 @@ ustart new --name new_project --dest . --template STM32F1 --variant f103c8t6 --r
 
 ## License
  μstart - This project is licensed under the MIT License.
- See [LICENSE](./LICENSE)for details.
+ See [LICENSE](./LICENSE) for details.
