@@ -190,7 +190,7 @@ shift
 
 case "$COMMAND" in
 	new)
-		echo "New Project Creation"
+		new_project
 		;;
 	build)
 		echo "[!] 'build' not implemented yet!"
@@ -200,7 +200,11 @@ case "$COMMAND" in
 		;;
 	--help|-h)
 		show_help
+		exit 0
 		;;
+	--version|-v)
+		show_version
+		exit 0
 	*)
 		echo "[!] Unknown command: $COMMAND"
 		exit 1
