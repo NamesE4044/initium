@@ -51,7 +51,7 @@ clean:
 
 flash:
 	$(FLASHER) erase
-	$(FLASHER) write $(OUT).bin $(FLASH)
+	$(FLASHER) write $(BUILD_DIR)/$(OUT).bin $(FLASH)
 
 erase:
 	$(FLASHER) erase
