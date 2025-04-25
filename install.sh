@@ -12,7 +12,7 @@ mkdir -p "$BIN_PATH"
 mkdir -p "$TEMPLATE_PATH"
 mkdir -p "$HOME/.local/bin"
 
-cp ./ustart "$BIN_PATH/firmkit"
+cp ./ustart "$BIN_PATH/ustart"
 chmod +x "$BIN_PATH/ustart"
 
 cp -r ./template/* "$TEMPLATE_PATH/"
