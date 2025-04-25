@@ -45,13 +45,13 @@ Usage: ustart -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
 	Options:
 		-n, --name:	New Project Name (Required)
 		-d, --dest:	New Project Destination Folder (Required)
-		-m, --mcu:	Target MCU (Default: STM32F103)
-		-r, --readme:	Create README file in new project (if left blank, ustart will prompt
+		-t, --temp:	Target Project Template (Default: STM32F103)
+		-r, --readme:	Create README file in new project (if left blank, ustart will prompt)
 		-h, --help:	Show this help page	
 		-v, --version:	Show Version Information
 
 	Example:
-		ustart -n newProj -d ~/Desktop/ -m STM32F103 -r n
+		ustart -n newProj -d ~/Desktop/ -t STM32F103 -r n
 EOF
 }
 
@@ -60,9 +60,10 @@ new_project(){
 	# ---------------VARIABLES---------------
 
 	name=""
-	mcu="STM32F103"
+	template="STM32F103"
 	readme="ask"
 	destDir=""
+	variant=""
 	# ---------------OPTIONS PARSING---------------
 
 	while [[ $# -gt 0 ]]; do
@@ -71,8 +72,8 @@ new_project(){
 				name="$2"
 				shift 2
 				;;
-			-m|--mcu)
-				mcu="$2"
+			-t|--template)
+				template="$2"
 				shift 2
 				;;
 			-r|--readme)
@@ -83,13 +84,9 @@ new_project(){
 				destDir="$2"
 				shift 2
 				;;
-			-v|--version)
-				show_version
-				exit 0
-				;;
-			-h|--help)
-				show_help
-				exit 0
+			-v|--variant)
+				variant="$2"
+				shift 2
 				;;
 			--)
 				shift
@@ -108,20 +105,24 @@ new_project(){
 	# ---------------INPUT VALIDATION---------------
 
 	if [ -z "$name" ]; then
-		echo  "$APP_NAME" "v$INITIUM_VERSION"
-		echo "Use -h or --help to see options"
-		exit 1
-	fi
-
-	if [ -z "$destDir" ]; then
-		echo -e "${TERM_RED}Error: No destination provided!${NC} Please use -d or --dest to specify destination directory."
+		echo -e ${TERM_RED}Error: No name provided!${NC} Please provide a project name via -n or --name""
 		exit 2
 	fi
 
-	if [ -d "$templateBaseDir/$mcu" ]; then
-		echo -e "${TERM_GREEN}Template Found!${NC} ($mcu)"
+	if [ -z "$destDir" ]; then
+		echo -e "${TERM_RED}Error: No destination provided!${NC} Please provide a project destination via -d or --dest"
+		exit 2
+	fi
+
+	if [ -d "$templateBaseDir/$template" ]; then
+		echo -e "${TERM_GREEN}Template Found!${NC} ($template)"
 	else
 		echo -e "${TERM_RED}Error: Template Not Found!${NC}"
+		exit 2
+	fi
+
+	if [[ -z "$variant" ]]; then
+		echo -e "${TERM_RED}Error:${NC} Variant not specified. Use -v|--version <variant>"
 		exit 2
 	fi
 
@@ -137,9 +138,15 @@ new_project(){
 
 	# ---------------PROJECT CREATION---------------
 
-	mkdir -p "$destDir/$name"
-	cp -r "$templateBaseDir/$mcu/"* "$destDir/$name"/
-	echo -e "${TERM_GREEN}New Template Created!${NC}\n"
+	rsync -av --exclude='variant' "$templateBaseDir/$template/common/" "$destDir/$name"
+
+	variantLinker="$templateBaseDir/$template/variant/${variant}.ld"
+	destLinker="$destDir/$name/linker/linker.ld"
+
+	mkdir -p "$destDir/$name/linker"
+	cp "$variantLinker" "$destLinker"
+
+	echo -e "${TERM_GREEN}New Project Created!${NC}\n"
 
 	# ---------------README PROMPT---------------
 
@@ -176,21 +183,33 @@ new_project(){
 		ls -R "$name"
 	fi
 
-	echo -e "\nNew Project Name: $name\nTarget MCU: $mcu\n"
+	echo -e "\nNew Project Name: $name\nTarget MCU: NULL\n"
 
 	echo -e "${TERM_GREEN}Thank You!${NC} Exiting..."
 
 	exit 0
 }
 
-# ---------------SUBCOMMAND LOGIC---------------
+# ---------------PREPROCESSOR LOGIC---------------
+
+if ! command -v rsync >/dev/null 2>&1; then
+	echo -e "${TERM_RED}Error:${NC} 'rsync' is not installed."
+	echo -e "Please install it using your system package manager to continue."
+	echo -e "	Debian/Ubuntu:	sudo apt install rsync"
+	echo -e "	Arch:		sudo pacman -S rsync"
+	echo -e "	Fedora:		sudo dnf install rsync"
+	echo -e "	macOS (brew):	brew install rsync"
+	exit 127
+fi
+
+# ---------------SUBCOMMAND LOGIC/ENTRY---------------
 
 COMMAND="$1"
 shift
 
 case "$COMMAND" in
 	new)
-		new_project
+		new_project "$@"
 		;;
 	build)
 		echo "[!] 'build' not implemented yet!"
@@ -205,6 +224,7 @@ case "$COMMAND" in
 	--version|-v)
 		show_version
 		exit 0
+		;;
 	*)
 		echo "[!] Unknown command: $COMMAND"
 		exit 1
