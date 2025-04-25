@@ -26,7 +26,14 @@
 #include <stdint.h>
 
 #define RCC_BASE	(0x40021000UL)
+
+#define GPIOA_BASE	(0x40010800UL)
+#define GPIOB_BASE	(0x40010C00UL)
 #define GPIOC_BASE	(0x40011000UL)
+
+#define EXTI_BASE	(0x40010000UL)
+
+#define USART1_BASE	(0x40013800UL)
 
 typedef struct {
 	volatile uint32_t CR;
@@ -51,7 +58,33 @@ typedef struct {
 	volatile uint32_t LCKR;
 }GPIO_TypeDef;
 
+typedef struct {
+	volatile uint32_t IMR;
+	volatile uint32_t EMR;
+	volatile uint32_t RTSR;
+	volatile uint32_t FTSR;
+	volatile uint32_t SWIER;
+	volatile uint32_t PR;
+}EXTI_TypeDef;
+
+typedef struct {
+	volatile uint32_t SR;
+	volatile uint32_t DR;
+	volatile uint32_t BRR;
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t CR3;
+	volatile uint32_t GTPR;
+}USART_TypeDef;
+
 #define RCC	((RCC_TypeDef*)RCC_BASE)
+
+#define GPIOA	((GPIO_TypeDef*)GPIOA_BASE)
+#define GPIOB	((GPIO_TypeDef*)GPIOB_BASE)
 #define GPIOC	((GPIO_TypeDef*)GPIOC_BASE)
+
+#define EXTI	((EXTI_TypeDef*)EXTI_BASE)
+
+#define USART1	((USART_TypeDef*)USART1_BASE)
 
 #endif
