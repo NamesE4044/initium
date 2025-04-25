@@ -105,13 +105,13 @@ new_project(){
 	# ---------------INPUT VALIDATION---------------
 
 	if [ -z "$name" ]; then
-		echo -e ${TERM_RED}Error: No name provided!${NC} Please provide a project name via -n or --name""
+		echo -e "${TERM_RED}Error: No name provided!${NC} Please provide a project name via -n or --name"
 		exit 2
 	fi
 
 	if [ -z "$destDir" ]; then
-		echo -e "${TERM_RED}Error: No destination provided!${NC} Please provide a project destination via -d or --dest"
-		exit 2
+		echo -e "${TERM_RED}Warning:${NC} Destination not specified, assuming current working directory!"
+		destDir="."
 	fi
 
 	if [ -d "$templateBaseDir/$template" ]; then
@@ -131,7 +131,7 @@ new_project(){
 		exit 1
 	fi
 
-	if [ -d "$name" ]; then
+	if [ -d "$destDir/$name" ]; then
 		echo -e "${TERM_RED}Error:${NC} Directory Already Exists!"
 		exit 1
 	fi
@@ -142,6 +142,11 @@ new_project(){
 
 	variantLinker="$templateBaseDir/$template/variant/${variant}.ld"
 	destLinker="$destDir/$name/linker/linker.ld"
+
+	if [ ! -f "$variantLinker" ]; then
+		echo -e "${TERM_RED}Error:${NC} Linker script not found for variant: ${variant}"
+		exit 1
+	fi
 
 	mkdir -p "$destDir/$name/linker"
 	cp "$variantLinker" "$destLinker"
@@ -183,7 +188,7 @@ new_project(){
 		ls -R "$name"
 	fi
 
-	echo -e "\nNew Project Name: $name\nTarget MCU: NULL\n"
+	echo -e "\nNew Project Name: $name\nTarget MCU: $template$variant\n"
 
 	echo -e "${TERM_GREEN}Thank You!${NC} Exiting..."
 
