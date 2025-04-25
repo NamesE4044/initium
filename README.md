@@ -36,3 +36,8 @@ ustart new --name new_project --dest . --template STM32F1 --variant f103c8t6 --r
 ### Future MCU Family Support
 - STM32F4xx (Cortex-M4)
 - GD32VF1xx (RISC-V)
+
+## License
+μstart - Copyright © 2025 Eric Robyn-Hardy
+This project is licensed under the MIT License.
+See the [LICENSE](./LICENSE) file for full details.
