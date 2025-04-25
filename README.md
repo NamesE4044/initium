@@ -11,6 +11,7 @@
 ### Prerequisites
 #### Core
 - rsync
+- tree (**Not mandatory**, script will fallback to ls -R if not found)
 #### Family-Specific
 - GNU ARM Toolchain (`arm-none-eabi-gcc`, `arm-none-eabi-ld`)
 - st-flash
@@ -29,4 +30,9 @@ ustart new --name new_project --dest . --template STM32F1 --variant f103c8t6 --r
 - Generates a new project named "new_project" in the current working directory targeting a STM32F103C8T6 MCU and skips generating a README.md file
 
 ## Currently Supported MCU Families
-- STM32f1xx
+- STM32F1xx
+
+## Roadmap
+### Future MCU Family Support
+- STM32F4xx (Cortex-M4)
+- GD32VF1xx (RISC-V)
