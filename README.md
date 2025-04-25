@@ -3,7 +3,7 @@
 
 ## Installation
 ```bash
-git clone https://github.com/NamesE4044/initium.git
-cd initium
+git clone https://github.com/NamesE4044/firmkit.git
+cd firmkit
 bash install.sh
 ```
