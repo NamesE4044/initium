@@ -136,7 +136,7 @@ fi
 # ---------------PROJECT CREATION---------------
 
 mkdir -p "$destDir/$name"
-cp "$templateBaseDir/$mcu/"* "$destDir/$name"/
+cp -r "$templateBaseDir/$mcu/"* "$destDir/$name"/
 echo -e "${GREEN}New Template Created!${NC}\n"
 
 # ---------------README PROMPT---------------

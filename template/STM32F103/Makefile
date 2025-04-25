@@ -11,8 +11,8 @@ AS = arm-none-eabi-as
 OBJCOPY = arm-none-eabi-objcopy
 
 SRC = main.c
-ASM = startup.s
-LINKER = stm32f103c8t6.ld
+ASM = src/startup.s
+LINKER = linker/stm32f103c8t6.ld
 MAP_FILE = firmware.map
 INCLUDE = -I.
 
