@@ -121,7 +121,7 @@ else
 	exit 2
 fi
 
-if [[ ! "$name" =~ ^[a-zA-Z0-0-9_-]+$ ]]; then
+if [[ ! "$name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
 	echo -e "${RED}Error: Invalid Input!${NC} Project name must only be letters, numbers, underscores, or dashes."
 	exit 1
 fi
