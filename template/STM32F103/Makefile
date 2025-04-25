@@ -3,6 +3,8 @@ CPU = -mcpu=$(MCU)
 FPU = -mfloat-abi=soft
 OPT = -O0
 
+BUILD_DIR = "./build"
+
 CC = arm-none-eabi-gcc
 LD = arm-none-eabi-ld
 AS = arm-none-eabi-as
@@ -37,9 +39,11 @@ $(OUT).elf: $(SRC:.c=.o) $(ASM:.s=.o)
 
 %.bin: %.elf
 	$(OBJCOPY) -O binary $< $@
+	mv *.o *.elf *.map *.bin $(BUILD_DIR)
 
 clean:
 	rm -f *.o *.elf *.bin
+	rm -rf $(BUILD_DIR)
 
 
 flash:
