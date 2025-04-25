@@ -4,7 +4,7 @@ set -e
 # ---------------FUNCTIONS & CORE VARIABLES---------------
 
 INITIUM_VERSION="1.0.0"
-APP_NAME="firmkit"
+APP_NAME="ustart"
 
 ascii_splash(){
 	clear
@@ -21,7 +21,7 @@ MM88MMM  88  8b,dPPYba,  88,dPYba,,adPYba,   88   ,d8   88  MM88MMM
 
 
 
-Firmkit - General Purpose Bare-Metal Embedded Project Generator
+ustart - General Purpose Bare-Metal Embedded Project Generator
 EOF
 }
 
@@ -36,18 +36,18 @@ show_help(){
 cat << "EOF"
 
 
-Usage: firmkit -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
+Usage: ustart -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
 
 	Options:
 		-n, --name:	New Project Name (Required)
 		-d, --dest:	New Project Destination Folder (Required)
 		-m, --mcu:	Target MCU (Default: STM32F103)
-		-r, --readme:	Create README file in new project (if left blank, firmkit will prompt
+		-r, --readme:	Create README file in new project (if left blank, ustart will prompt
 		-h, --help:	Show this help page	
 		-v, --version:	Show Version Information
 
 	Example:
-		firmkit -n newProj -d ~/Desktop/ -m STM32F103 -r n
+		ustart -n newProj -d ~/Desktop/ -m STM32F103 -r n
 EOF
 }
 
@@ -101,7 +101,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 
-templateBaseDir="$HOME/.firmkit/template"
+templateBaseDir="$HOME/.ustart/template"
 
 # ---------------INPUT VALIDATION---------------
 

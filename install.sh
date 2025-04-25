@@ -1,19 +1,19 @@
 #!/bin/bash
 set -e
 
-INITIUM_DIR="$HOME/.firmkit"
+INITIUM_DIR="$HOME/.ustart"
 BIN_PATH="$INITIUM_DIR/bin"
 TEMPLATE_PATH="$INITIUM_DIR/template"
-LINK_PATH="$HOME/.local/bin/firmkit"
+LINK_PATH="$HOME/.local/bin/ustart"
 
-echo "[*] Installing firmkit Locally"
+echo "[*] Installing ustart Locally"
 
 mkdir -p "$BIN_PATH"
 mkdir -p "$TEMPLATE_PATH"
 mkdir -p "$HOME/.local/bin"
 
-cp ./firmkit "$BIN_PATH/firmkit"
-chmod +x "$BIN_PATH/firmkit"
+cp ./ustart "$BIN_PATH/firmkit"
+chmod +x "$BIN_PATH/ustart"
 
 cp -r ./template/* "$TEMPLATE_PATH/"
 
@@ -21,7 +21,7 @@ if [[ -f "$LINK_PATH" ]]; then
 	echo "[!] Existing symlink at $LINK_PATH found. Replacing..."
 	rm "$LINK_PATH"
 fi
-ln -s "$BIN_PATH/firmkit" "$LINK_PATH"
+ln -s "$BIN_PATH/ustart" "$LINK_PATH"
 
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	echo -e "\n[!] WARNING: ~/.local/bin is not in your PATH."
@@ -29,5 +29,5 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	echo "	export PATH=\"\$HOME/.local/bin:\$PATH\""
 fi
 
-echo -e "\n[!] firmkit installed successfully!"
-echo "	You can now run: firmkit -h"
+echo -e "\n[!] ustart installed successfully!"
+echo "	You can now run: ustart -h"
