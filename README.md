@@ -1,2 +1,2 @@
 # initium
-General Purpose Bare-Metal Embedded Project Generator
+General Purpose STM32 Bare-Metal Embedded Project Generator
