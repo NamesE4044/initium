@@ -1,4 +1,4 @@
-#include "stm32f103.h"
+#include "stm32f1xx.h"
 
 void __attribute__((noreturn)) main(void){
 
