@@ -151,6 +151,15 @@ new_project(){
 	mkdir -p "$destDir/$name/linker"
 	cp "$variantLinker" "$destLinker"
 
+	find "$destDir/$name" -type f \( -name "*.c" -o -name "*.s" -o -name "*.ld" -o -name "*.ld" \) | while read -r file; do
+		echo "Injecting Comment"
+		sed -i "1i\\
+// μstart project file - Licensed under MIT
+" "$file"
+	done
+
+#	find "$destDir/$name" -type f
+
 	echo -e "${TERM_GREEN}New Project Created!${NC}\n"
 
 	# ---------------README PROMPT---------------
