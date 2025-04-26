@@ -16,7 +16,7 @@
  *
  *  Version: 1.0.0
  *  Date: 2025-04-23
- *  Copyright 2025 Eric Robyn-Hardy
+ *  Copyright 2025 NamesE4044
  *  Licensed under the MIT License - See LICENSE file or https://github.com/NamesE4044/ustart
  * ==================================================================================================
  */
