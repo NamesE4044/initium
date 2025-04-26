@@ -40,7 +40,10 @@ show_help(){
 cat << "EOF"
 
 
-Usage: ustart -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
+Usage: ustart <command> [command options]
+
+	Commands:
+		new	-n <project_name> -d <destination> -t <template -v f103x8 -r n
 
 	Options:
 		-n, --name:	New Project Name (Required)
@@ -51,7 +54,7 @@ Usage: ustart -n <project_name> -d <destination> [-m <mcu>] [-r <readme option>]
 		-v, --version:	Show Version Information
 
 	Example:
-		ustart -n newProj -d ~/Desktop/ -t STM32F103 -r n
+		ustart new -n newProj -d ~/Desktop/ -t STM32F103 -r n
 EOF
 }
 
@@ -122,7 +125,7 @@ new_project(){
 	fi
 
 	if [[ -z "$variant" ]]; then
-		echo -e "${TERM_RED}Error:${NC} Variant not specified. Use -v|--version <variant>"
+		echo -e "${TERM_RED}Error:${NC} Variant not specified. Use -v|--variant <variant>"
 		exit 2
 	fi
 
@@ -232,7 +235,8 @@ case "$COMMAND" in
 		echo "[!] 'flash' not implemented yet!"
 		;;
 	--help|-h)
-		show_help
+#		show_help
+		show_version
 		exit 0
 		;;
 	--version|-v)
