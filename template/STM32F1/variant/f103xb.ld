@@ -1,14 +1,14 @@
 /*
  * ================================================================================================
- *  Linker Script for STM32F103x8 (Medium-Density Devices)
- *  Target Example: STM32F103C8T6
+ *  Linker Script for STM32F103xB (Medium-Density Devices)
+ *  Target Example: STM32F103CBT7
  *
  *  Description:
  *  - Defines memory layout for flash and RAM.
  *  - Specifies placement of program sections (.data, .bss, .text)
  *  - Used by arm-none-eabi-ld to link object files into a flat binary file for flashing
  *
- *  Flash: 64KB at 0x08000000
+ *  Flash: 128KB at 0x08000000
  *  RAM:   20KB at 0x20000000
  *
  *  Sections:
@@ -27,7 +27,7 @@ ENTRY(Reset_Handler)
 
 MEMORY
 {
-	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 64K
+	FLASH (RX) : ORIGIN = 0x08000000, LENGTH = 128K
 	RAM (RWX)  : ORIGIN = 0x20000000, LENGTH = 20K
 }
 
