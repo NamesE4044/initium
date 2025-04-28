@@ -157,7 +157,7 @@ new_project(){
 	find "$destDir/$name" -type f \( -name "*.c" -o -name "*.s" -o -name "*.ld" -o -name "*.ld" \) | while read -r file; do
 		echo "Injecting Comment"
 		sed -i "1i\\
-// μstart project file - Licensed under MIT
+/* μstart project file - Licensed under MIT */
 " "$file"
 	done
 
