@@ -8,6 +8,9 @@ LD = arm-none-eabi-ld
 AS = arm-none-eabi-as
 OBJCOPY = arm-none-eabi-objcopy
 
+PICOLIB_DIR = /usr/lib/picolibc/arm-none-eabi
+PICOLIBC_INC = $(PICOLIB_DIR)/include
+PICOLIBC_LIB = $(PICOLIB_DIR)/lib
 BUILD_DIR = build
 SRC_DIR = .
 SRC = main.c
@@ -15,10 +18,10 @@ ASM = src/startup.s
 LINKER = linker/linker.ld
 MAP_FILE = $(BUILD_DIR)/firmware.map
 INCLUDE = -Iinclude
-OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/startup.o
+OBJS = $(BUILD_DIR)/startup.o $(BUILD_DIR)/main.o
 
-CFLAGS = $(CPU) $(FPU) $(OPT) -Wall -ffunction-sections -ffreestanding -fdata-sections $(INCLUDE)
-LDFLAGS = -T $(LINKER) -Map=$(MAP_FILE)
+CFLAGS = $(CPU) $(FPU) $(OPT) -Wall -ffunction-sections -ffreestanding -fdata-sections -nostdinc -I$(PICOLIBC_INC) $(INCLUDE)
+LDFLAGS = -T $(LINKER) -L$(PICOLIBC_LIB) -nostdlib -Map=$(MAP_FILE)
 
 FLASHER = st-flash
 FLASH = 0x08000000
