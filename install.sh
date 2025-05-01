@@ -8,20 +8,22 @@ LINK_PATH="$HOME/.local/bin/ustart"
 
 echo "[*] Installing ustart Locally"
 
-mkdir -p "$BIN_PATH"
-mkdir -p "$TEMPLATE_PATH"
-mkdir -p "$HOME/.local/bin"
+mkdir -p "$BIN_PATH" "$TEMPLATE_PATH" "$HOME/.local/bin"
+echo "[*] Created core directories"
 
 cp ./ustart "$BIN_PATH/ustart"
 chmod +x "$BIN_PATH/ustart"
+echo "[*] ustart CLI installed"
 
-cp -r ./template/* "$TEMPLATE_PATH/"
+cp -r ./template* "$TEMPLATE_PATH/"
+echo "[*] Templates installed"
 
 if [[ -f "$LINK_PATH" ]]; then
 	echo "[!] Existing symlink at $LINK_PATH found. Replacing..."
 	rm "$LINK_PATH"
 fi
 ln -s "$BIN_PATH/ustart" "$LINK_PATH"
+
 
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 	echo -e "\n[!] WARNING: ~/.local/bin is not in your PATH."
@@ -30,4 +32,4 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
 fi
 
 echo -e "\n[!] ustart installed successfully!"
-echo "	You can now run: ustart -h"
+echo "You can now run: ustart -h"
