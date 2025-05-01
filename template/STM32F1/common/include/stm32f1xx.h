@@ -26,6 +26,8 @@
 
 #include <stdint.h>
 
+#define TIM2_BASE	(0x40000000UL)
+
 #define RCC_BASE	(0x40021000UL)
 
 #define GPIOA_BASE	(0x40010800UL)
@@ -77,6 +79,31 @@ typedef struct {
 	volatile uint32_t CR3;
 	volatile uint32_t GTPR;
 }USART_TypeDef;
+
+typedef struct {
+	volatile uint32_t CR1;
+	volatile uint32_t CR2;
+	volatile uint32_t SMCR;
+	volatile uint32_t DIER;
+	volatile uint32_t SR;
+	volatile uint32_t EGR;
+	volatile uint32_t CCMR1;
+	volatile uint32_t CCMR2;
+	volatile uint32_t CCER;
+	volatile uint32_t CNT;
+	volatile uint32_t PSC;
+	volatile uint32_t ARR;
+	volatile uint32_t RESERVEDX;
+	volatile uint32_t CCR1;
+	volatile uint32_t CCR2;
+	volatile uint32_t CCR3;
+	volatile uint32_t CCR4;
+	volatile uint32_t RESERVEDY;
+	volatile uint32_t DCR;
+	volatile uint32_t DMAR;
+}TIM_TypeDef;
+
+#define TIM2	((TIM_TypeDef*)TIM2_BASE)
 
 #define RCC	((RCC_TypeDef*)RCC_BASE)
 
