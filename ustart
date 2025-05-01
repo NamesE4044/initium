@@ -5,10 +5,11 @@ set -e
 
 INITIUM_VERSION="1.0.0"
 APP_NAME="ustart"
-NC='\033[0m'
 
+NC='\033[0m'
 TERM_RED='\033[0;31m'
 TERM_GREEN='\033[0;32m'
+TERM_YEL='\033[33m'
 
 ascii_splash(){
 	clear
@@ -42,19 +43,20 @@ cat << "EOF"
 
 Usage: ustart <command> [command options]
 
-	Commands:
-		new	-n <project_name> -d <destination> -t <template -v f103x8 -r n
-
 	Options:
-		-n, --name:	New Project Name (Required)
-		-d, --dest:	New Project Destination Folder (Required)
-		-t, --temp:	Target Project Template (Default: STM32F103)
+		-n, --name:	New project name (Required)
+		-d, --dest:	New project destination folder (Will assume current working directory if left empty)
+		-t, --template:	Target project MCU family (Required)
+		-v, --variant:	Target MCU model (
 		-r, --readme:	Create README file in new project (if left blank, ustart will prompt)
+
 		-h, --help:	Show this help page	
 		-v, --version:	Show Version Information
 
 	Example:
-		ustart new -n newProj -d ~/Desktop/ -t STM32F103 -r n
+		ustart new --name newProj --dest ~/Desktop -template STM32F1 --variant f103x8 --readme n
+
+	For more info, visit https://github.com/NamesE4044/ustart
 EOF
 }
 
@@ -63,7 +65,7 @@ new_project(){
 	# ---------------VARIABLES---------------
 
 	name=""
-	template="STM32F1"
+	template=""
 	readme="ask"
 	destDir=""
 	variant=""
@@ -96,7 +98,7 @@ new_project(){
 				break
 				;;
 			*)
-				echo -e "${TERM_RED}Error!${NC} Unknown option '$1'"
+				echo -e "${TERM_RED}Error:${NC} Unknown option '$1'."
 				exit 3
 				;;
 		esac
@@ -108,29 +110,34 @@ new_project(){
 	# ---------------INPUT VALIDATION---------------
 
 	if [ -z "$name" ]; then
-		echo -e "${TERM_RED}Error: No name provided!${NC} Please provide a project name via -n or --name"
+		echo -e "${TERM_RED}Error:${NC} No name provided. Use -n|--name <project_name>."
 		exit 2
 	fi
 
 	if [ -z "$destDir" ]; then
-		echo -e "${TERM_RED}Warning:${NC} Destination not specified, assuming current working directory!"
+		echo -e "${TERM_YEL}Warning:${NC} Destination not specified, assuming current working directory..."
 		destDir="."
+	fi
+
+	if [ -z "$template" ]; then
+		echo -e "${TERM_RED}Error:${NC} Template not specified. Use -t|--template <template_name>."
+		exit 2
 	fi
 
 	if [ -d "$templateBaseDir/$template" ]; then
 		echo -e "${TERM_GREEN}Template Found!${NC} ($template)"
 	else
-		echo -e "${TERM_RED}Error: Template Not Found!${NC}"
+		echo -e "${TERM_RED}Error:${NC} Template '$template' not found."
 		exit 2
 	fi
 
 	if [[ -z "$variant" ]]; then
-		echo -e "${TERM_RED}Error:${NC} Variant not specified. Use -v|--variant <variant>"
+		echo -e "${TERM_RED}Error:${NC} Variant not specified. Use -v|--variant <variant>."
 		exit 2
 	fi
 
 	if [[ ! "$name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-		echo -e "${TERM_RED}Error: Invalid Input!${NC} Project name must only be letters, numbers, underscores, or dashes."
+		echo -e "${TERM_RED}Error:${NC} Invalid Input. Project name must only be letters, numbers, underscores, or dashes."
 		exit 1
 	fi
 
@@ -220,6 +227,11 @@ if ! command -v rsync >/dev/null 2>&1; then
 fi
 
 # ---------------SUBCOMMAND LOGIC/ENTRY---------------
+
+if [ -z "$1" ]; then
+	echo -e "ustart ${INITIUM_VERSION}"
+	exit 0
+fi
 
 COMMAND="$1"
 shift
