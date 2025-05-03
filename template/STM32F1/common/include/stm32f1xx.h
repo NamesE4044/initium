@@ -30,6 +30,8 @@
 
 #define RCC_BASE	(0x40021000UL)
 
+#define AFIO_BASE	(0x40010000UL)
+
 #define GPIOA_BASE	(0x40010800UL)
 #define GPIOB_BASE	(0x40010C00UL)
 #define GPIOC_BASE	(0x40011000UL)
@@ -103,7 +105,19 @@ typedef struct {
 	volatile uint32_t DMAR;
 }TIM_TypeDef;
 
+typedef struct {
+	volatile uint32_t EVCR;
+	volatile uint32_t MAPR;
+	volatile uint32_t EXTICR1;
+	volatile uint32_t EXTICR2;
+	volatile uint32_t EXTICR3;
+	volatile uint32_t EXTICR4;
+	volatile uint32_t MAPR2;
+}AFIO_TypeDef;
+
 #define TIM2	((TIM_TypeDef*)TIM2_BASE)
+
+#define AFIO	((AFIO_TypeDef*)AFIO_BASE)
 
 #define RCC	((RCC_TypeDef*)RCC_BASE)
 
