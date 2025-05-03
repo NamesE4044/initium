@@ -146,17 +146,18 @@ new_project(){
 		exit 1
 	fi
 
+	variantLinker="$templateBaseDir/$template/variant/${variant}.ld"
+
+	if [ ! -f "$variantLinker"  ]; then
+		echo -e "$TERM_RED}Error:${NC} Linker script not found for specified variant: ${variant}"
+		exit 1;
+	fi
+
 	# ---------------PROJECT CREATION---------------
 
 	rsync -av --exclude='variant' "$templateBaseDir/$template/common/" "$destDir/$name"
 
-	variantLinker="$templateBaseDir/$template/variant/${variant}.ld"
 	destLinker="$destDir/$name/linker/linker.ld"
-
-	if [ ! -f "$variantLinker" ]; then
-		echo -e "${TERM_RED}Error:${NC} Linker script not found for variant: ${variant}"
-		exit 1
-	fi
 
 	mkdir -p "$destDir/$name/linker"
 	cp "$variantLinker" "$destLinker"
