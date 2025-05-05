@@ -58,9 +58,9 @@ typedef struct {
 	volatile uint32_t CRH;		// Control Register High
 	volatile uint32_t IDR;		// Input Data Register
 	volatile uint32_t ODR;		// Output Data Register
-	volatile uint32_t BSRR;
-	volatile uint32_t BRR;
-	volatile uint32_t LCKR;
+	volatile uint32_t BSRR;		// Bit set/reset Register
+	volatile uint32_t BRR;		// Bit Reset Register
+	volatile uint32_t LCKR;		// Config Lock Register
 }GPIO_TypeDef;
 
 typedef struct {
@@ -73,13 +73,13 @@ typedef struct {
 }EXTI_TypeDef;
 
 typedef struct {
-	volatile uint32_t SR;
-	volatile uint32_t DR;
+	volatile uint32_t SR;		// Status Register
+	volatile uint32_t DR;		// Data Register
 	volatile uint32_t BRR;		// Baud Rate Register
-	volatile uint32_t CR1;
-	volatile uint32_t CR2;
-	volatile uint32_t CR3;
-	volatile uint32_t GTPR;
+	volatile uint32_t CR1;		// Control Register 1
+	volatile uint32_t CR2;		// Control Register 2
+	volatile uint32_t CR3;		// Control Register 3
+	volatile uint32_t GTPR;		// Guard time & prescaler register
 }USART_TypeDef;
 
 typedef struct {
