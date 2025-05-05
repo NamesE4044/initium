@@ -47,17 +47,17 @@ typedef struct {
 	volatile uint32_t APB2RSTR;
 	volatile uint32_t APB1RSTR;
 	volatile uint32_t AHBENR;
-	volatile uint32_t APB2ENR;
-	volatile uint32_t APB1ENR;
+	volatile uint32_t APB2ENR;	// APB2 Clock Enable Register
+	volatile uint32_t APB1ENR;	// APB1 Clock Enable Register
 	volatile uint32_t BDCR;
 	volatile uint32_t CSR;
 } RCC_TypeDef;
 
 typedef struct {
-	volatile uint32_t CRL;
-	volatile uint32_t CRH;
-	volatile uint32_t IDR;
-	volatile uint32_t ODR;
+	volatile uint32_t CRL;		// Control Register Low
+	volatile uint32_t CRH;		// Control Register High
+	volatile uint32_t IDR;		// Input Data Register
+	volatile uint32_t ODR;		// Output Data Register
 	volatile uint32_t BSRR;
 	volatile uint32_t BRR;
 	volatile uint32_t LCKR;
