@@ -14,6 +14,7 @@ PICOLIBC_LIB = $(PICOLIB_DIR)/lib
 BUILD_DIR = build
 SRC_DIR = .
 SRC = main.c
+SRC += src/*.c
 ASM = src/startup.s
 LINKER = linker/linker.ld
 MAP_FILE = $(BUILD_DIR)/firmware.map
