@@ -4,6 +4,7 @@ set -e
 # ---------------FUNCTIONS & CORE VARIABLES---------------
 
 INITIUM_VERSION="1.0.0"
+USTART_CORE="$HOME/.ustart"
 APP_NAME="ustart"
 
 NC='\033[0m'
