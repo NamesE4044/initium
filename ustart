@@ -5,6 +5,7 @@ set -e
 
 INITIUM_VERSION="1.0.0"
 USTART_CORE="$HOME/.ustart"
+USTART_DATA_FILE="$USTART_CORE/ustart-projects.dat"
 APP_NAME="ustart"
 
 NC='\033[0m'
@@ -153,6 +154,12 @@ new_project(){
 		echo -e "$TERM_RED}Error:${NC} Linker script not found for specified variant: ${variant}"
 		exit 1;
 	fi
+
+	# ---------------RESOLVE DESTINATION PATH---------------
+	destDir=$(realpath "$destDir") || {
+		echo -e "${TERM_RED}Error:${NC} Cannot resolve destination path"
+		exit 1
+	}
 
 	# ---------------PROJECT CREATION---------------
 
