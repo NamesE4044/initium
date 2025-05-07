@@ -208,6 +208,12 @@ new_project(){
 		echo "Skipping README Creation..."
 	fi
 
+	# ---------------METADATA COPYING---------------
+	METADATA_LINE=$(printf "%s\t%s\t%s\t%s" "$name" "$newProjPath" 
+	"$template" "$variant")
+	printf "%s\n" "$METADATA_LINE" >> "$USTART_DATA_FILE"
+	echo "Metadata logged"
+
 	# ---------------DISPLAY PROJECT INFO---------------
 
 	echo -e "\nDisplaying New Project Structure:"
