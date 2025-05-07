@@ -230,6 +230,27 @@ new_project(){
 	exit 0
 }
 
+edit_cmd(){
+	# ---------------VARIABLES---------------
+	# ---------------OPTIONS PARSING---------------
+	while [[ $# -gt 0 ]]; do
+		case "$1" in
+			--clear)
+				> "$USTART_DATA_FILE"
+				break
+				;;
+			--)
+				shift
+				break
+				;;
+			*)
+				echo -e "${TERM_RED}Error:${NC} Unknown option."
+				exit 3;
+				;;
+		esac
+	done
+}
+
 # ---------------PREPROCESSOR LOGIC---------------
 
 if ! command -v rsync >/dev/null 2>&1; then
@@ -261,6 +282,9 @@ case "$COMMAND" in
 		;;
 	flash)
 		echo "[!] 'flash' not implemented yet!"
+		;;
+	edit)
+		edit_cmd
 		;;
 	--help|-h)
 #		show_help
