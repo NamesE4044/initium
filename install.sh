@@ -16,6 +16,7 @@ chmod +x "$BIN_PATH/ustart"
 echo "[*] ustart CLI installed"
 
 cp ./ustart-projects.dat "$INITIUM_DIR"
+echo "[*] ustart Project Data File Installed"
 
 cp -r ./template* "$TEMPLATE_PATH/"
 echo "[*] Templates installed"
