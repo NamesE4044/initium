@@ -160,7 +160,8 @@ new_project(){
 		echo -e "${TERM_RED}Error:${NC} Cannot resolve destination path"
 		exit 1
 	}
-	echo "Destination: $destDir"
+	newProjPath="$destDir/$name"
+	echo "New Project Path: $newProjPath"
 
 	# ---------------PROJECT CREATION---------------
 
