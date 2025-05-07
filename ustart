@@ -209,7 +209,7 @@ new_project(){
 	fi
 
 	# ---------------METADATA COPYING---------------
-	METADATA_LINE=$(printf "%s\t%s\t%s\t%s" "$name" "$newProjPath" 	"$template" "$variant")
+	METADATA_LINE=$(printf "%s\t%s" "$name" "$newProjPath")
 	printf "%s\n" "$METADATA_LINE" >> "$USTART_DATA_FILE"
 	echo "Metadata logged"
 
